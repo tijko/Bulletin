@@ -4,7 +4,9 @@ Bulletin
 
 Bulletin is a python module that monitors filesystem events.  There are two 
 parts to Bulletin, one is the server and the other, client threads. The twisted
-framework will need to be install before using [first](https://twistedmatrix.com/trac/)
+framework will need to be installed before using first, you can get a copy of
+from [http://twistedmatrix.com](https://twistedmatrix.com/trac/) or 
+`pip install twisted`
 
 ##Usage
 
@@ -46,5 +48,23 @@ Which is a `dict` of `dict`s of:
   * 'path' as a key in the sub-dict for the path of the watch
   * 'mask' as a key in the sub-dict for the event-mask number
   * 'event' as the actually event name
+
+The `size_diff` attribute will return difference in size of bytes since the 
+watch began.
+
+    # /tmp/local just had 30 bytes written...
+    >>>
+    >>> tac.size_diff
+    30
+
+There also several class properties that return `bool` if a specific event
+is triggered.
+
+    >>> tac.modified
+    True
+
+Once you are done with the watch call the `end` method to exit the thread.
+
+    >>> tac.end()
 
 
