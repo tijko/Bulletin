@@ -25,6 +25,20 @@ class Thumbtac(Thread):
         self._set_watch 
 
     @property
+    def modified(self):
+        events = self.notices.values()
+        if any(event['event'] == 'modify' for event in events):
+            return True
+        return False
+
+    @property
+    def accessed(self):
+        events = self.notices.values()
+        if any(event['event'] == 'access' for event in events):
+            return True
+        return False
+
+    @property
     def last_notice(self):
         try:
             return time.ctime(max(self.notices))
