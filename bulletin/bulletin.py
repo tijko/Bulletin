@@ -27,16 +27,12 @@ class Thumbtac(Thread):
     @property
     def modified(self):
         events = self.notices.values()
-        if any(event['event'] == 'modify' for event in events):
-            return True
-        return False
+        return any(event['event'] == 'modify' for event in events)
 
     @property
     def accessed(self):
         events = self.notices.values()
-        if any(event['event'] == 'access' for event in events):
-            return True
-        return False
+        return any(event['event'] == 'access' for event in events)
 
     @property
     def last_notice(self):
